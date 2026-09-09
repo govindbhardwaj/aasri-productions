@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Aasri Productions</title>
+<meta name="description" content="How Aasri Productions collects, uses and protects the information you share through this website.">
+<link rel="icon" href="assets/img/ui/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  .doc{ padding-top:calc(var(--nav-h) + clamp(3rem,7vw,6rem)); }
+  .doc h1{ font-size:var(--fs-d1); margin-bottom:1.5rem; }
+  .doc h2{ font-size:var(--fs-d3); margin:2.75rem 0 .9rem; }
+  .doc p, .doc li{ color:var(--ink-soft); max-width:68ch; }
+  .doc ul{ list-style:disc; padding-left:1.2rem; margin-bottom:1.1rem; }
+  .doc li{ margin-bottom:.45rem; }
+  .doc .note{ border-left:2px solid var(--champagne); padding:.9rem 1.2rem; background:var(--bone); font-size:.9375rem; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav nav--solid" id="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="index.html" aria-label="Aasri Productions — home"><b>Aasri Productions</b><span>Est. 2018</span></a>
+    <nav class="nav__menu" aria-label="Primary">
+      <a href="index.html#stories">Work</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="index.html#films">Films</a>
+      <a href="index.html#packages">Packages</a>
+      <a href="index.html#about">Studio</a>
+    </nav>
+    <div class="nav__actions">
+      <a class="btn nav__cta" href="index.html#inquire">Check Your Date</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><i></i></button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <nav class="menu__list" aria-label="Mobile">
+    <a href="index.html#stories">Work</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="index.html#films">Films</a>
+    <a href="index.html#packages">Packages</a>
+    <a href="index.html#about">Studio</a>
+    <a href="index.html#inquire">Inquire</a>
+  </nav>
+  <div class="menu__foot">
+    <a href="tel:+13234472333" data-bind="business.phone">+1 323-447-2333</a>
+    <div class="social" data-social></div>
+  </div>
+</div>
+
+<main id="main" class="wrap wrap--narrow doc">
+  <p class="eyebrow">Legal</p>
+  <h1 class="display">Privacy Policy</h1>
+  <p class="lead">This page explains what happens to the information you share with <span data-bind="business.name">Aasri Productions</span> through this website.</p>
+
+  <p class="note" style="margin-top:2rem">
+    <b>Draft for review.</b> This is a plain-English starting point written for this website's actual
+    behaviour. Have it checked against your obligations — including California privacy law and any
+    SMS consent language you use — before you publish it.
+  </p>
+
+  <h2 class="display">What we collect</h2>
+  <p>When you send an inquiry, we collect only what you type into the form:</p>
+  <ul>
+    <li>Your name</li>
+    <li>Your email address and, if you give one, your phone number</li>
+    <li>Your wedding date, location and estimated guest count</li>
+    <li>The services you are interested in and how you heard about us</li>
+    <li>Anything you write in the message field</li>
+  </ul>
+  <p>We also store the date and time of the inquiry and the browser you sent it from, which helps us
+  spot automated spam.</p>
+
+  <h2 class="display">Why we collect it</h2>
+  <p>To answer your inquiry, confirm whether your date is available, prepare a quote, and — if you
+  book us — to plan and deliver your wedding coverage. We do not sell your information, and we do
+  not add you to a marketing list unless you ask us to.</p>
+
+  <h2 class="display">Where it is stored</h2>
+  <p>Inquiries are stored in Google Firebase (Cloud Firestore), a hosted database service. Access is
+  limited to the studio team through a password-protected admin account.</p>
+
+  <h2 class="display">Other services this site uses</h2>
+  <ul>
+    <li><b>Google Fonts</b> — typefaces are requested from Google's servers when the page loads.</li>
+    <li><b>YouTube</b> — wedding films are hosted on YouTube. Nothing is requested from YouTube until
+      you press play on a film, and we use the <code>youtube-nocookie</code> player.</li>
+    <li><b>Google Maps</b> — the studio map in the footer loads from Google when you scroll to it.</li>
+  </ul>
+  <p>These services have their own privacy policies and may set their own cookies once loaded. This
+  website itself does not set advertising or tracking cookies.</p>
+
+  <h2 class="display">Photographs</h2>
+  <p>The photographs and films on this site are our work, shared with the permission of the couples in
+  them. If you appear in an image here and would like it removed, contact us and we will do that.</p>
+
+  <h2 class="display">Your choices</h2>
+  <p>You can ask us at any time to show you what we hold about you, correct it, or delete it. Email or
+  call the studio and we will take care of it.</p>
+
+  <h2 class="display">Contact</h2>
+  <p>
+    <span data-bind="business.name">Aasri Productions</span><br>
+    <span data-bind="business.studioName"></span>, <span data-bind="business.city"></span><br>
+    <a href="tel:+13234472333" data-bind="business.phone"></a>
+  </p>
+
+  <p style="margin-top:3rem"><a class="link" href="index.html">Back to the website <span class="arw" aria-hidden="true">&#8594;</span></a></p>
+</main>
+
+<footer class="foot" style="margin-top:clamp(4rem,8vw,7rem)">
+  <div class="wrap">
+    <div class="foot__bar" style="border-top:1px solid var(--rule-noir)">
+      <p>&copy; <span data-year></span> <span data-bind="footer.legalName"></span>. All rights reserved.</p>
+      <div class="social" data-social></div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/firebase-config.js"></script>
+<script type="module" src="assets/js/store.js"></script>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

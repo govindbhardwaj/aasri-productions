@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Studio Admin — Aasri Productions</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/img/ui/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ivory:#F7F4EF; --bone:#EFE9DF; --ink:#16150F; --graphite:#6E675E; --mute:#948C81;
+  --rule:rgba(22,21,15,.14); --champagne:#B08D57; --ok:#3F7A4F; --err:#B4462F; --white:#fff;
+  --serif:"Cormorant Garamond",Georgia,serif; --sans:"Jost",system-ui,sans-serif;
+}
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; background:var(--ivory); color:var(--ink); font-family:var(--sans); font-weight:300; font-size:15px; line-height:1.6; }
+h1,h2,h3{ font-family:var(--serif); font-weight:400; margin:0; line-height:1.15; }
+a{ color:inherit; }
+button{ font:inherit; cursor:pointer; }
+:focus-visible{ outline:2px solid var(--champagne); outline-offset:2px; }
+.vh{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+
+/* Shell */
+.top{ position:sticky; top:0; z-index:20; background:rgba(247,244,239,.94); backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--rule); display:flex; align-items:center; gap:1rem; padding:.85rem clamp(1rem,4vw,2.5rem); flex-wrap:wrap; }
+.top__brand{ font-family:var(--serif); font-size:1.25rem; margin-right:auto; }
+.top__brand small{ font-family:var(--sans); font-size:.5625rem; letter-spacing:.24em; text-transform:uppercase; color:var(--graphite); display:block; }
+.who{ font-size:.8125rem; color:var(--graphite); }
+main{ max-width:1180px; margin-inline:auto; padding:clamp(1.5rem,4vw,2.75rem) clamp(1rem,4vw,2.5rem) 6rem; }
+
+/* Buttons */
+.btn{ display:inline-flex; align-items:center; justify-content:center; gap:.5rem; min-height:42px; padding:.6rem 1.25rem;
+  background:var(--ink); color:var(--ivory); border:1px solid var(--ink); font-size:.75rem; letter-spacing:.16em;
+  text-transform:uppercase; transition:background .3s,color .3s,border-color .3s,opacity .2s; }
+.btn:hover:not(:disabled){ background:var(--champagne); border-color:var(--champagne); color:#fff; }
+.btn:disabled{ opacity:.45; cursor:not-allowed; }
+.btn--ghost{ background:transparent; color:var(--ink); border-color:var(--rule); }
+.btn--ghost:hover:not(:disabled){ color:#fff; }
+.btn--sm{ min-height:34px; padding:.35rem .8rem; font-size:.625rem; }
+.btn--danger{ background:transparent; color:var(--err); border-color:rgba(180,70,47,.4); }
+.btn--danger:hover:not(:disabled){ background:var(--err); border-color:var(--err); color:#fff; }
+
+/* Tabs */
+.tabs{ display:flex; gap:.35rem; flex-wrap:wrap; border-bottom:1px solid var(--rule); margin-bottom:2rem; }
+.tabs button{ background:none; border:0; border-bottom:2px solid transparent; padding:.75rem 1rem;
+  font-size:.75rem; letter-spacing:.16em; text-transform:uppercase; color:var(--graphite); }
+.tabs button[aria-selected="true"]{ color:var(--ink); border-bottom-color:var(--champagne); }
+[role="tabpanel"][hidden]{ display:none; }
+
+/* Login */
+.gate{ max-width:400px; margin:12vh auto; padding:2.5rem; background:var(--white); border:1px solid var(--rule); }
+.gate h1{ font-size:2rem; margin-bottom:.4rem; }
+.gate p.sub{ color:var(--graphite); font-size:.875rem; margin:0 0 1.75rem; }
+
+/* Fields */
+.f{ margin-bottom:1.15rem; }
+.f label{ display:block; font-size:.625rem; letter-spacing:.2em; text-transform:uppercase; color:var(--graphite); margin-bottom:.4rem; }
+.f input,.f textarea,.f select{ width:100%; padding:.62rem .8rem; background:var(--white); border:1px solid var(--rule);
+  border-radius:0; font:inherit; font-size:.9375rem; }
+.f textarea{ resize:vertical; min-height:76px; font-size:.875rem; }
+.f input:focus,.f textarea:focus,.f select:focus{ outline:0; border-color:var(--champagne); }
+.f .hint{ font-size:.75rem; color:var(--mute); margin:.35rem 0 0; }
+.grid2{ display:grid; grid-template-columns:1fr; gap:0 1.15rem; }
+@media(min-width:760px){ .grid2{ grid-template-columns:1fr 1fr; } .grid2 .span{ grid-column:1/-1; } }
+
+/* Cards */
+.card{ background:var(--white); border:1px solid var(--rule); padding:clamp(1.25rem,2.5vw,1.85rem); margin-bottom:1.25rem; }
+.card > h2{ font-size:1.5rem; margin-bottom:.35rem; }
+.card > .lead{ color:var(--graphite); font-size:.875rem; margin:0 0 1.5rem; }
+.item{ border:1px solid var(--rule); padding:1.15rem; margin-bottom:.85rem; background:var(--ivory); }
+.item__head{ display:flex; align-items:center; gap:.75rem; margin-bottom:.9rem; }
+.item__head b{ font-weight:400; font-size:.75rem; letter-spacing:.16em; text-transform:uppercase; color:var(--graphite); margin-right:auto; }
+
+/* Banners */
+.banner{ padding:.9rem 1.15rem; border-left:3px solid var(--champagne); background:#FBF7F0; font-size:.875rem; margin-bottom:1.5rem; }
+.banner--err{ border-color:var(--err); background:#FDF3F1; color:#7A2E1E; }
+.banner--ok{ border-color:var(--ok); background:#F1F7F2; color:#245233; }
+.banner code{ font-size:.8125rem; background:rgba(22,21,15,.06); padding:.1rem .35rem; }
+
+/* Inquiries */
+.inq-row{ display:grid; grid-template-columns:1fr; gap:.5rem 1.25rem; padding:1.15rem; border:1px solid var(--rule);
+  background:var(--white); margin-bottom:.7rem; }
+@media(min-width:860px){ .inq-row{ grid-template-columns:1.3fr 1fr 1fr auto; align-items:start; } }
+.inq-row.is-new{ border-left:3px solid var(--champagne); }
+.inq-name{ font-family:var(--serif); font-size:1.35rem; }
+.inq-meta{ font-size:.8125rem; color:var(--graphite); }
+.inq-meta b{ font-weight:400; color:var(--ink); }
+.inq-msg{ font-size:.875rem; color:var(--graphite); grid-column:1/-1; border-top:1px solid var(--rule); padding-top:.75rem; margin-top:.25rem; white-space:pre-wrap; }
+.pill{ display:inline-block; padding:.2rem .55rem; font-size:.5625rem; letter-spacing:.16em; text-transform:uppercase;
+  border:1px solid var(--rule); color:var(--graphite); }
+.pill--new{ border-color:var(--champagne); color:var(--champagne); }
+.tools{ display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; margin-bottom:1.5rem; }
+.tools select{ padding:.5rem .7rem; border:1px solid var(--rule); background:var(--white); font:inherit; font-size:.8125rem; }
+
+/* Sticky save bar */
+.savebar{ position:sticky; bottom:0; z-index:15; background:rgba(247,244,239,.95); backdrop-filter:blur(12px);
+  border-top:1px solid var(--rule); padding:.9rem 0; display:flex; gap:.75rem; align-items:center; flex-wrap:wrap; margin-top:1.5rem; }
+.savebar .status{ font-size:.8125rem; color:var(--graphite); margin-left:auto; }
+.mono{ font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:.8125rem; line-height:1.5; }
+.empty{ padding:3rem 1rem; text-align:center; color:var(--graphite); border:1px dashed var(--rule); }
+</style>
+</head>
+<body>
+
+<!-- ------------------------------------------------------------ GATE -->
+<section class="gate" id="gate" hidden>
+  <h1>Studio Admin</h1>
+  <p class="sub">Aasri Productions — sign in to manage the website.</p>
+  <div id="gateBanner"></div>
+  <form id="loginForm">
+    <div class="f">
+      <label for="lEmail">Email</label>
+      <input id="lEmail" type="email" autocomplete="username" required>
+    </div>
+    <div class="f">
+      <label for="lPass">Password</label>
+      <input id="lPass" type="password" autocomplete="current-password" required>
+    </div>
+    <button class="btn" style="width:100%" type="submit" id="loginBtn">Sign in</button>
+  </form>
+  <p style="margin-top:1.5rem;font-size:.8125rem"><a href="index.html">&larr; Back to the website</a></p>
+</section>
+
+<!-- ----------------------------------------------------------- SHELL -->
+<div id="app" hidden>
+  <header class="top">
+    <div class="top__brand">Aasri Productions<small>Studio Admin</small></div>
+    <span class="who" id="who"></span>
+    <a class="btn btn--ghost btn--sm" href="index.html" target="_blank" rel="noopener">View site</a>
+    <button class="btn btn--ghost btn--sm" id="logout">Sign out</button>
+  </header>
+
+  <main>
+    <div class="tabs" role="tablist" aria-label="Admin sections">
+      <button role="tab" id="tab-inq"     aria-controls="p-inq"     aria-selected="true">Inquiries</button>
+      <button role="tab" id="tab-content" aria-controls="p-content" aria-selected="false">Website content</button>
+      <button role="tab" id="tab-media"   aria-controls="p-media"   aria-selected="false">Films &amp; reels</button>
+      <button role="tab" id="tab-pkg"     aria-controls="p-pkg"     aria-selected="false">Packages</button>
+      <button role="tab" id="tab-letters" aria-controls="p-letters" aria-selected="false">Love letters</button>
+      <button role="tab" id="tab-json"    aria-controls="p-json"    aria-selected="false">Advanced</button>
+    </div>
+
+    <div id="todo"></div>
+
+    <!-- Inquiries -->
+    <section role="tabpanel" id="p-inq" aria-labelledby="tab-inq">
+      <div class="tools">
+        <select id="inqFilter" aria-label="Filter inquiries by status">
+          <option value="all">All inquiries</option>
+          <option value="new" selected>New only</option>
+          <option value="contacted">Contacted</option>
+          <option value="archived">Archived</option>
+        </select>
+        <button class="btn btn--ghost btn--sm" id="inqRefresh">Refresh</button>
+        <button class="btn btn--ghost btn--sm" id="inqExport">Export CSV</button>
+      </div>
+      <div id="inqList"><p class="empty">Loading inquiries…</p></div>
+    </section>
+
+    <!-- Content -->
+    <section role="tabpanel" id="p-content" aria-labelledby="tab-content" hidden>
+      <div id="contentForms"></div>
+    </section>
+
+    <!-- Media -->
+    <section role="tabpanel" id="p-media" aria-labelledby="tab-media" hidden>
+      <div id="mediaForms"></div>
+    </section>
+
+    <!-- Packages -->
+    <section role="tabpanel" id="p-pkg" aria-labelledby="tab-pkg" hidden>
+      <div id="pkgForms"></div>
+    </section>
+
+    <!-- Love letters -->
+    <section role="tabpanel" id="p-letters" aria-labelledby="tab-letters" hidden>
+      <div id="letterForms"></div>
+    </section>
+
+    <!-- Advanced -->
+    <section role="tabpanel" id="p-json" aria-labelledby="tab-json" hidden>
+      <div class="card">
+        <h2>Advanced — raw content</h2>
+        <p class="lead">This is the complete published content document. Everything the guided tabs edit lives in here, plus the gallery, stories, services and copy blocks. Edit carefully — it must stay valid JSON.</p>
+        <div class="f">
+          <label for="jsonBox">site/content</label>
+          <textarea id="jsonBox" class="mono" rows="26" spellcheck="false"></textarea>
+          <p class="hint">Tip: paste an empty object <code>{}</code> and save to reset the site back to its built-in defaults.</p>
+        </div>
+        <div id="jsonBanner"></div>
+      </div>
+    </section>
+
+    <div class="savebar">
+      <button class="btn" id="saveBtn">Publish changes</button>
+      <button class="btn btn--ghost" id="reloadBtn">Discard &amp; reload</button>
+      <span class="status" id="saveStatus"></span>
+    </div>
+  </main>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/firebase-config.js"></script>
+<script type="module" src="assets/js/admin.js"></script>
+</body>
+</html>
