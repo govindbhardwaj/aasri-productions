@@ -15,23 +15,35 @@
    ============================================================= */
 
 window.BDM_FIREBASE_CONFIG = {
-  apiKey:            "YOUR_API_KEY",
-  authDomain:        "YOUR_PROJECT.firebaseapp.com",
-  projectId:         "YOUR_PROJECT_ID",
-  storageBucket:     "YOUR_PROJECT.firebasestorage.app",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId:             "YOUR_APP_ID"
+  apiKey: "AIzaSyDjWzokx1IJhuD-7ckk9M7u_mVLzKgSOuE",
+
+  authDomain: "aasri-productions.firebaseapp.com",
+
+  projectId: "aasri-productions",
+
+  storageBucket: "aasri-productions.firebasestorage.app",
+
+  messagingSenderId: "66156451027",
+
+  appId: "1:66156451027:web:2c3fc1b5904e22c90ef026",
+
+  measurementId: "G-CDDTELRDQN",
 };
 
 /* Firestore locations used by the site */
 window.BDM_PATHS = {
-  contentDoc:        ["site", "content"],   // published site content
-  inquiriesCol:      "inquiries"            // form submissions
+  contentDoc: ["site", "content"], // published site content
+  inquiriesCol: "inquiries", // form submissions
 };
 
 /* True once real values are in place. */
 window.BDM_FIREBASE_READY = (function (c) {
-  return !!c && typeof c.apiKey === "string" &&
-         c.apiKey.length > 12 && c.apiKey.indexOf("YOUR_") !== 0 &&
-         typeof c.projectId === "string" && c.projectId.indexOf("YOUR_") !== 0;
+  return (
+    !!c &&
+    typeof c.apiKey === "string" &&
+    c.apiKey.length > 12 &&
+    c.apiKey.indexOf("YOUR_") !== 0 &&
+    typeof c.projectId === "string" &&
+    c.projectId.indexOf("YOUR_") !== 0
+  );
 })(window.BDM_FIREBASE_CONFIG);
