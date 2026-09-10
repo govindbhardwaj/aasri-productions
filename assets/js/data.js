@@ -32,7 +32,7 @@ window.BDM_DEFAULT_CONTENT = {
 
   business: {
     name: "Aasri Productions",
-    tagline: "You live the day. We keep it.",
+    tagline: "You live it. We keep it.",
     taglineNeedsReview: true,          /* placeholder — replace with Aasri's own line */
     phone: "+1 323-447-2333",
     phoneHref: "tel:+13234472333",
@@ -56,37 +56,37 @@ window.BDM_DEFAULT_CONTENT = {
   },
 
   hero: {
-    eyebrow: "Wedding Photography &amp; Cinematography — Los Angeles &amp; Worldwide",
+    eyebrow: "Event Photography &amp; Cinematography — Los Angeles &amp; Worldwide",
     headlineTop: "The moments",
     headlineEm: "you will live in",
     headlineBottom: "forever.",
-    sub: "Twenty years behind the camera, more than a thousand weddings, and one promise: you live the day, we keep every part of it worth keeping.",
+    sub: "Twenty years behind the camera, more than a thousand projects, and one promise: you live it, we keep every part of it worth keeping.",
     primaryCta: { label: "Check Your Date", href: "#inquire" },
-    secondaryCta: { label: "Watch a Wedding Film", href: "#films" },
+    secondaryCta: { label: "Watch a Film", href: "#films" },
     video: "assets/video/hero.mp4",
     poster: "assets/img/posters/video-poster-00001.jpg"
   },
 
   manifesto: {
     words: ["Elegant", "Cinematic", "Unhurried", "Yours"],
-    lead: "A wedding lasts a day. The way it felt should last considerably longer.",
-    body: "We photograph and film weddings the way you will want to remember them — the half-second before the vows, the hand your father would not let go of, the room at midnight. Nothing staged that should not be. Nothing missed that matters."
+    lead: "A moment lasts a second. The way it felt should last considerably longer.",
+    body: "We photograph and film every occasion the way you will want to remember it — the half-second before the vows, the hand your father would not let go of, the room at midnight. Nothing staged that should not be. Nothing missed that matters."
   },
 
   /* Stats and promises — all published on bigdaymemories.com */
   difference: {
-    eyebrow: "Why couples choose us",
-    title: "Twenty years of first looks,\nlast dances and everything between.",
+    eyebrow: "Why clients choose us",
+    title: "Twenty years of milestones,\ncampaigns and everything between.",
     items: [
-      { figure: "20",   suffix: "+",         label: "Years",          copy: "More than 20 years in the wedding industry." },
-      { figure: "1000", suffix: "+",         label: "Weddings",       copy: "Photographed and filmed more than 1000 weddings worldwide." },
+      { figure: "20",   suffix: "+",         label: "Years",          copy: "More than 20 years in the photography and film industry." },
+      { figure: "1000", suffix: "+",         label: "Projects",       copy: "Photographed and filmed more than 1000 projects worldwide." },
       { figure: "3",    suffix: " days",     label: "Sneak peek",     copy: "Just 3 days to see a sneak peek of your celebration." },
       { figure: "30",   suffix: "–45 days", label: "Final delivery", copy: "Your complete gallery and films, delivered in 30 to 45 days." }
     ],
     notes: [
       { title: "Excellence",          copy: "Top rated, award-winning service in LA." },
       { title: "A beautiful studio",  copy: "A sun-drenched studio and event space in LA downtown." },
-      { title: "Beside you all the way", copy: "We are here to support, guide, help you plan, lend a helping hand and, of course, document your Big Day in the most stress free and enjoyable way." }
+      { title: "Beside you all the way", copy: "We are here to support, guide, help you plan, lend a helping hand and, of course, document it all in the most stress free and enjoyable way." }
     ]
   },
 
@@ -170,7 +170,7 @@ window.BDM_DEFAULT_CONTENT = {
 
   /* Real published films from youtube.com/@bigdaymemories_la */
   films: {
-    eyebrow: "Wedding films",
+    eyebrow: "Our films",
     title: "Press play.\nThen imagine it is yours.",
     /* Reference placeholders only: real, public YouTube uploads by other
        studios, shown to demonstrate the film-gallery layout. Captioned
@@ -192,17 +192,20 @@ window.BDM_DEFAULT_CONTENT = {
 
   services: {
     eyebrow: "What we do",
-    title: "Everything your day\nneeds remembering by.",
+    title: "Every occasion,\nproperly remembered.",
     items: [
-      { name: "Wedding Photography",  copy: "Candid moments, portraits, details, ceremony and celebration — two cameras, all day, nothing missed.", img: "assets/img/gallery/g08.webp" },
-      { name: "Wedding Videography",  copy: "Cinematic highlight films and documentary coverage, from getting ready to the last dance.",                 img: "assets/img/gallery/g14.webp" },
-      { name: "Engagement Sessions",  copy: "A relaxed photo shoot built around the two of you — and the best rehearsal for your wedding day.",      img: "assets/img/gallery/g12.webp" },
-      { name: "Engagement Films",     copy: "Short cinematic engagement stories, shot on location and cut like a trailer.",                              img: "assets/img/gallery/g18.webp" },
-      { name: "Drone Cinematography", copy: "Aerial perspective on your venue, your coastline, your celebration from above.",                            img: "assets/img/gallery/g31.webp" },
-      { name: "Reels &amp; Teasers",  copy: "Vertical, share-ready films within days — the first thing everyone asks for.",                          img: "assets/img/gallery/g20.webp" },
-      { name: "Full Wedding Movies",  copy: "The long-form film: up to 30 or 60 minutes of your day, start to finish.",                                  img: "assets/img/gallery/g03.webp" },
-      { name: "Destination Weddings", copy: "We have filmed weddings worldwide. Tell us where, and we will be there.",                                   img: "assets/img/gallery/g27.webp" },
-      { name: "Posing Master Class",  copy: "An in-person session so you know exactly how to stand, move and look on the day.",                          img: "assets/img/gallery/g26.webp" }
+      { name: "Wedding Photography",       copy: "Candid moments, portraits, details, ceremony and celebration — two cameras, all day, nothing missed.", img: "assets/img/gallery/g08.webp" },
+      { name: "Wedding Films &amp; Cinematography", copy: "Cinematic highlight films and documentary coverage, from getting ready to the last dance.",     img: "assets/img/gallery/g14.webp" },
+      { name: "Pre-Wedding &amp; Post-Wedding Shoots", copy: "A relaxed session built around the two of you, on location — photography and film.",         img: "assets/img/gallery/g12.webp" },
+      { name: "Maternity &amp; Baby Shoots", copy: "Studio or on-location sessions for the months before, and the ones right after.",                      img: "assets/img/services/maternity.webp" },
+      { name: "Event &amp; Party Photography", copy: "Birthdays, receptions, family functions and corporate events, covered properly.",                    img: "assets/img/services/event-party.webp" },
+      { name: "Product &amp; Catalogue Photography", copy: "Clean, consistent studio photography for e-commerce, lookbooks and catalogues.",                img: "assets/img/services/product.webp" },
+      { name: "Commercial &amp; Advertisement Shoots", copy: "Brand campaigns, lookbooks and advertising work, shot to a brief.",                           img: "assets/img/services/commercial.webp" },
+      { name: "Drone Cinematography",      copy: "Aerial perspective on your venue, your coastline, your celebration from above.",                          img: "assets/img/gallery/g31.webp" },
+      { name: "Reels &amp; Social Content", copy: "Vertical, share-ready edits within days — the first thing everyone asks for.",                          img: "assets/img/gallery/g20.webp" },
+      { name: "Full-Length Wedding Films", copy: "The long-form film: up to 30 or 60 minutes of your day, start to finish.",                                img: "assets/img/gallery/g03.webp" },
+      { name: "Destination Shoots",        copy: "Weddings, portraits and campaigns filmed worldwide. Tell us where, and we will be there.",                img: "assets/img/gallery/g27.webp" },
+      { name: "Posing &amp; Styling Guidance", copy: "An in-person session so you know exactly how to stand, move and look on the day.",                    img: "assets/img/gallery/g26.webp" }
     ]
   },
 
@@ -298,8 +301,8 @@ window.BDM_DEFAULT_CONTENT = {
     eyebrow: "Inside the studio",
     title: "The people who will\nbe standing beside you.",
     body: [
-      "We are here to support, guide, help you plan, lend a helping hand and, of course, document your Big Day in the most stress free and enjoyable way.",
-      "Twenty years and more than a thousand weddings later, very little surprises us — which is exactly what you want on a day with a hundred moving parts. We will help you build the timeline, tell you when the light will be best, and be the calmest people in the room.",
+      "We are here to support, guide, help you plan, lend a helping hand and, of course, document it all in the most stress free and enjoyable way.",
+      "Twenty years and more than a thousand projects later, very little surprises us — which is exactly what you want on a day with a hundred moving parts. We will help you build the timeline, tell you when the light will be best, and be the calmest people in the room.",
       "Our home is a sun-drenched studio and event space in downtown Los Angeles. Come by, meet us, and see the work printed."
     ],
     clips: [
@@ -315,15 +318,15 @@ window.BDM_DEFAULT_CONTENT = {
 
   inquire: {
     eyebrow: "Let us begin",
-    title: "Your big day\nstarts here.",
-    copy: "Tell us a little about your wedding. We will come back to you with availability, a real answer on pricing, and no pressure whatsoever.",
+    title: "Your story\nstarts here.",
+    copy: "Tell us a little about your event. We will come back to you with availability, a real answer on pricing, and no pressure whatsoever.",
     submitLabel: "Check My Date",
     successTitle: "Thank you — that has arrived.",
     successCopy: "We will be in touch shortly about your date. If it is urgent, call us on +1 323-447-2333."
   },
 
   footer: {
-    statement: "Wedding photography and cinematography from a downtown Los Angeles studio — for celebrations in California and anywhere in the world.",
+    statement: "Photography and cinematography from a downtown Los Angeles studio — weddings, events and campaigns, in California and anywhere in the world.",
     legalName: "Aasri Productions",
     copyrightFrom: "2018"
   }

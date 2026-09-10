@@ -500,7 +500,7 @@
     var id = esc(f.youtube);
     return '<div class="player" data-yt="' + id + '">' +
       '<img src="https://i.ytimg.com/vi/' + id + '/maxresdefault.jpg" ' +
-        'alt="Still from the wedding film: ' + esc(txt(f.couple)) + '" loading="lazy" decoding="async" ' +
+        'alt="Still from the film: ' + esc(txt(f.couple)) + '" loading="lazy" decoding="async" ' +
         'width="1280" height="720" data-fallback="https://i.ytimg.com/vi/' + id + '/hqdefault.jpg">' +
       '<button class="player__btn" type="button" aria-label="Play film: ' + esc(txt(f.couple)) + '">' +
         '<span class="player__play">' +
@@ -549,7 +549,7 @@
       var p = btn.closest(".player");
       var f = document.createElement("iframe");
       f.src = "https://www.youtube-nocookie.com/embed/" + p.dataset.yt + "?autoplay=1&rel=0&modestbranding=1";
-      f.title = "Wedding film";
+      f.title = "Film";
       f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share";
       f.allowFullscreen = true;
       f.loading = "lazy";

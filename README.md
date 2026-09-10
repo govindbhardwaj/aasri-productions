@@ -1,6 +1,6 @@
 # Aasri Productions — website
 
-A static, luxury-editorial website for the Aasri Productions wedding photography and
+A static, luxury-editorial website for Aasri Productions, an event photography and
 cinematography studio, built to run on **GitHub Pages** with a **Firebase** admin panel
 for content and inquiries.
 

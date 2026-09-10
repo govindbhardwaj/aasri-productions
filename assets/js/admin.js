@@ -394,24 +394,24 @@ function buildEditors() {
     })}
 
     <div class="card">
-      <h2>Featured wedding film</h2>
+      <h2>Featured film</h2>
       <p class="lead">The large player at the top of the films section.</p>
       <div class="grid2">
         ${field({ path: "films.featured.youtube", label: "YouTube link", hint: "Paste the full YouTube URL, a youtu.be link, or just the video ID." })}
         ${field({ path: "films.featured.couple", label: "Couple" })}
-        ${field({ path: "films.featured.meta", label: "Wedding type — location" })}
+        ${field({ path: "films.featured.meta", label: "Type — location" })}
         ${field({ path: "films.featured.note", label: "Note (package, coverage…)" })}
       </div>
     </div>
 
     ${listEditor({
-      path: "films.items", label: "More wedding films", itemLabel: "Film",
+      path: "films.items", label: "More films", itemLabel: "Film",
       lead: "Shown in the grid beneath the featured film. Nothing loads from YouTube until a visitor presses play. " +
             "The current IDs point at other studios' public uploads as layout placeholders — replace them with your own.",
       fields: [
         { k: "youtube", label: "YouTube link", hint: "Full URL or just the video ID." },
         { k: "couple",  label: "Couple / title" },
-        { k: "meta",    label: "Wedding type — location", wide: true }
+        { k: "meta",    label: "Type — location", wide: true }
       ],
       defaults: { youtube: "", couple: "", meta: "" }
     })}
@@ -435,7 +435,7 @@ function buildEditors() {
       lead: "The horizontal rail of recent projects. The couples shown are stock-photo placeholders, not real clients — replace with your own work.",
       fields: [
         { k: "couple",   label: "Couple" },
-        { k: "type",     label: "Wedding type" },
+        { k: "type",     label: "Project type" },
         { k: "location", label: "Location" },
         { k: "pkg",      label: "Package badge" },
         { k: "img",      label: "Photo link", wide: true },
