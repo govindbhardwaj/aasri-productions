@@ -153,6 +153,34 @@ window.addEventListener("beforeunload", (e) => {
 })();
 
 /* ======================================================== 2. CONTENT */
+/* Cleans up links saved before driveDirectUrl()/extractYouTubeId() existed
+   (or pasted straight into the Advanced/JSON tab, which bypasses both).
+   Runs once on load so a stale broken link fixes itself the moment the
+   panel opens, rather than only on the next time someone retypes it. */
+function normalizeMediaLinks(d) {
+  let changed = false;
+  const fix = (obj, key, fn) => {
+    if (!obj || typeof obj[key] !== "string" || !obj[key]) return;
+    const v = fn(obj[key]);
+    if (v !== obj[key]) { obj[key] = v; changed = true; }
+  };
+  const each = (arr, key, fn) => { if (Array.isArray(arr)) arr.forEach((it) => fix(it, key, fn)); };
+
+  if (d.hero) fix(d.hero, "poster", driveDirectUrl);
+  if (d.films && d.films.featured) fix(d.films.featured, "youtube", extractYouTubeId);
+  each(d.films && d.films.items, "youtube", extractYouTubeId);
+  if (d.loveLetters) {
+    fix(d.loveLetters, "filmYoutube", extractYouTubeId);
+    each(d.loveLetters.items, "img", driveDirectUrl);
+  }
+  each(d.gallery && d.gallery.items, "src", driveDirectUrl);
+  each(d.reels && d.reels.items, "poster", driveDirectUrl);
+  each(d.stories, "img", driveDirectUrl);
+  each(d.services && d.services.items, "img", driveDirectUrl);
+
+  return changed;
+}
+
 async function loadContent() {
   const [col, doc] = PATHS.contentDoc;
   try {
@@ -161,6 +189,10 @@ async function loadContent() {
   } catch (err) {
     draft = {};
     status("Could not load saved content: " + (err.code || err.message), "err");
+  }
+  if (normalizeMediaLinks(draft)) {
+    markDirty();
+    status("Fixed a Google Drive or YouTube link that wasn't in the right format — click Publish to save the fix.", "ok");
   }
   $("#jsonBox").value = JSON.stringify(draft, null, 2);
 }
