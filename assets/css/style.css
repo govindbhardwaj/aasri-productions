@@ -174,17 +174,29 @@ a:hover .frame--zoom img, .frame--zoom:hover img{ transform:scale(1.045); }
 }
 .nav__inner{ width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:var(--gut);
   display:flex; align-items:center; justify-content:space-between; gap:2rem; }
-.nav__brand{ display:flex; align-items:baseline; gap:.6rem; line-height:1; flex:none; }
-.nav__brand img{ height:clamp(28px,2.4vw,36px); width:auto; align-self:center; flex:none;
-  transition:height .5s var(--ease); }
-.nav--solid .nav__brand img{ height:clamp(24px,2vw,30px); }
-/* The wordmark has to hold its own against the tracked nav links beside it,
-   so it runs a step larger and a weight heavier than body serif copy. */
-.nav__brand b{
-  font-family:var(--serif); font-weight:500;
-  font-size:clamp(1.42rem, 1.05rem + .75vw, 1.85rem);
-  letter-spacing:.008em; white-space:nowrap;
+.nav__brand{ display:flex; align-items:center; gap:.6rem; line-height:1; flex:none; }
+/* The mark and wordmark are cut straight from the studio's own logo art —
+   painted with currentColor via a CSS mask instead of two baked-in color
+   variants, so the exact same file reads gold over the hero and ink once
+   the nav goes solid, matching whatever color the rest of the bar takes. */
+.brandmark,.wordmark{
+  flex:none; background-color:var(--champagne-l);
+  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+  -webkit-mask-size:contain; mask-size:contain;
+  transition:background-color .5s var(--ease), width .5s var(--ease);
 }
+.brandmark{
+  width:clamp(26px,2.2vw,33px); aspect-ratio:450/360;
+  -webkit-mask-image:url(assets/img/ui/mark.png); mask-image:url(assets/img/ui/mark.png);
+  -webkit-mask-position:center; mask-position:center;
+}
+.wordmark{
+  width:clamp(118px,9.6vw,150px); aspect-ratio:689/160;
+  -webkit-mask-image:url(assets/img/ui/wordmark.png); mask-image:url(assets/img/ui/wordmark.png);
+  -webkit-mask-position:left center; mask-position:left center;
+}
+.nav--solid .brandmark{ width:clamp(22px,1.9vw,28px); }
+.nav--solid .wordmark{ width:clamp(100px,8vw,128px); }
 .nav__brand span{
   font-size:.5938rem; letter-spacing:.3em; text-transform:uppercase;
   color:var(--graphite); white-space:nowrap;
@@ -205,13 +217,16 @@ a:hover .frame--zoom img, .frame--zoom:hover img{ transform:scale(1.045); }
 /* Transparent over hero, solid after scroll */
 .nav--over{ color:var(--ivory); }
 .nav--over .nav__brand span{ color:rgba(247,244,239,.72); }
-/* Cormorant's thin strokes disappear over a bright frame — lift them off it. */
-.nav--over .nav__brand b{ text-shadow:0 1px 2px rgba(10,9,6,.4), 0 2px 22px rgba(10,9,6,.55); }
 .nav--over .nav__menu a,
 .nav--over .nav__brand span{ text-shadow:0 1px 12px rgba(10,9,6,.55); }
+/* Gold reads clean against the hero's photo; against the solid ivory bar
+   it goes flat ink instead, the same swap the rest of the nav text makes,
+   so the mark never sits half-visible against a near-matching background. */
+.nav--over .brandmark,.nav--over .wordmark{ background-color:var(--champagne-l);
+  filter:drop-shadow(0 1px 10px rgba(10,9,6,.5)); }
 .nav--solid{ background:rgba(247,244,239,.92); backdrop-filter:blur(14px) saturate(1.4);
   -webkit-backdrop-filter:blur(14px) saturate(1.4); box-shadow:0 1px 0 var(--rule-soft); color:var(--ink); height:68px; }
-.nav--solid .nav__brand b{ font-size:clamp(1.32rem, 1rem + .6vw, 1.62rem); }
+.nav--solid .brandmark,.nav--solid .wordmark{ background-color:var(--ink); }
 .nav--solid .nav__brand span{ color:var(--graphite); }
 .nav--solid .nav__cta{ display:inline-flex; }
 
@@ -560,9 +575,9 @@ body.menu-open .menu__list a:nth-child(7){ transition-delay:.54s; }
 /* -------------------------------------------------------------- 17. Footer */
 .foot{ background:var(--noir); color:var(--on-noir); padding-top:clamp(4rem,8vw,7rem); }
 .foot__top{ display:grid; grid-template-columns:1fr; gap:2.75rem; padding-bottom:clamp(3rem,6vw,5rem); border-bottom:1px solid var(--rule-noir); }
-.foot__brandmark{ display:flex; align-items:center; gap:.9rem; margin-bottom:.9rem; }
-.foot__brandmark img{ height:38px; width:auto; flex:none; }
-.foot__brand b{ font-family:var(--serif); font-weight:400; font-size:1.7rem; display:block; }
+.foot__brandmark{ display:flex; align-items:center; gap:1.1rem; margin-bottom:1.1rem; }
+.foot__brandmark .brandmark{ width:44px; background-color:var(--champagne-l); }
+.foot__brandmark .wordmark{ width:150px; background-color:var(--champagne-l); }
 .foot__brand p{ color:var(--on-noir-mute); max-width:38ch; font-size:.9375rem; }
 .foot h4{ font-family:var(--sans); font-size:.625rem; letter-spacing:.24em; text-transform:uppercase;
   color:var(--on-noir-mute); margin-bottom:1.2rem; font-weight:400; }
