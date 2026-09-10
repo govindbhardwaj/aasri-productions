@@ -738,22 +738,6 @@
   }
 
   /* ======================================================== 14. FORM */
-  function renderForm(c) {
-    var chips = $("[data-service-chips]"), heard = $("[data-heard]");
-    if (chips) {
-      chips.innerHTML = (c.inquire.services || []).map(function (s) {
-        return '<label class="chip"><input type="checkbox" name="services" value="' + esc(s) +
-          '"><span>' + esc(s) + "</span></label>";
-      }).join("");
-    }
-    if (heard) {
-      heard.innerHTML = '<option value="">Select&hellip;</option>' +
-        (c.inquire.heardAbout || []).map(function (h) {
-          return '<option value="' + esc(h) + '">' + esc(h) + "</option>";
-        }).join("");
-    }
-  }
-
   function initForm(c) {
     var form = $("#inquiryForm"); if (!form) return;
     if (form.dataset.wired) return;
@@ -789,15 +773,12 @@
 
       var fd = new FormData(form);
       var payload = {
-        firstName: (fd.get("firstName") || "").trim(),
-        lastName: (fd.get("lastName") || "").trim(),
-        email: (fd.get("email") || "").trim(),
+        name: (fd.get("name") || "").trim(),
         phone: (fd.get("phone") || "").trim(),
-        weddingDate: fd.get("weddingDate") || "",
+        email: (fd.get("email") || "").trim(),
+        eventDate: fd.get("eventDate") || "",
         location: (fd.get("location") || "").trim(),
-        services: fd.getAll("services"),
         guests: fd.get("guests") ? Number(fd.get("guests")) : null,
-        heardAbout: fd.get("heardAbout") || "",
         message: (fd.get("message") || "").trim()
       };
 
@@ -869,7 +850,6 @@
     renderPackages(c);
     renderLetters(c);
     renderAbout(c);
-    renderForm(c);
     renderSocial(c);
     renderMap(c);
     observe(document);

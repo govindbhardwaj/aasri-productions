@@ -145,13 +145,14 @@ service cloud.firestore {
 
     function isValidInquiry(d) {
       return d.keys().hasOnly([
-               'firstName','lastName','email','phone','weddingDate','location',
-               'services','guests','heardAbout','message','status','createdAt',
-               'source','userAgent'
+               'name','phone','email','eventDate','location',
+               'guests','message','status','createdAt','source','userAgent'
              ])
-             && d.firstName is string && d.firstName.size() > 0 && d.firstName.size() < 100
+             && d.name is string && d.name.size() > 0 && d.name.size() < 150
+             && d.phone is string && d.phone.size() > 0 && d.phone.size() < 40
              && d.email is string && d.email.size() < 200 && d.email.matches('.*@.*[.].*')
-             && d.message.size() < 5000
+             && d.eventDate is string && d.eventDate.size() > 0
+             && d.message is string && d.message.size() > 0 && d.message.size() < 5000
              && d.status == 'new';
     }
 

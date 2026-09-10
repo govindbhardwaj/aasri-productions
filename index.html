@@ -301,13 +301,14 @@
         <div>
           <form class="form" id="inquiryForm" novalidate>
             <div class="field">
-              <label for="fFirst">First name <span class="req" aria-hidden="true">*</span></label>
-              <input id="fFirst" name="firstName" type="text" autocomplete="given-name" required>
-              <p class="field__err">Please add your first name.</p>
+              <label for="fName">Name <span class="req" aria-hidden="true">*</span></label>
+              <input id="fName" name="name" type="text" autocomplete="name" required>
+              <p class="field__err">Please add your name.</p>
             </div>
             <div class="field">
-              <label for="fLast">Last name</label>
-              <input id="fLast" name="lastName" type="text" autocomplete="family-name">
+              <label for="fPhone">Phone <span class="req" aria-hidden="true">*</span></label>
+              <input id="fPhone" name="phone" type="tel" autocomplete="tel" required>
+              <p class="field__err">Please add a phone number we can reach you on.</p>
             </div>
             <div class="field">
               <label for="fEmail">Email <span class="req" aria-hidden="true">*</span></label>
@@ -315,32 +316,22 @@
               <p class="field__err">Please add an email we can reply to.</p>
             </div>
             <div class="field">
-              <label for="fPhone">Phone</label>
-              <input id="fPhone" name="phone" type="tel" autocomplete="tel">
+              <label for="fDate">Event date <span class="req" aria-hidden="true">*</span></label>
+              <input id="fDate" name="eventDate" type="date" required>
+              <p class="field__err">Please let us know the date.</p>
             </div>
             <div class="field">
-              <label for="fDate">Wedding date</label>
-              <input id="fDate" name="weddingDate" type="date">
-            </div>
-            <div class="field">
-              <label for="fLoc">Wedding location</label>
+              <label for="fLoc">Event location</label>
               <input id="fLoc" name="location" type="text" placeholder="Venue, city or “still deciding”">
-            </div>
-            <div class="field field--full">
-              <label id="lblServices">Services you are interested in</label>
-              <div class="chips" data-service-chips role="group" aria-labelledby="lblServices"></div>
             </div>
             <div class="field">
               <label for="fGuests">Estimated guest count</label>
               <input id="fGuests" name="guests" type="number" min="0" step="1" inputmode="numeric" placeholder="120">
             </div>
-            <div class="field">
-              <label for="fHeard">How did you hear about us?</label>
-              <select id="fHeard" name="heardAbout" data-heard><option value="">Select…</option></select>
-            </div>
             <div class="field field--full">
-              <label for="fMsg">Tell us about your wedding</label>
-              <textarea id="fMsg" name="message" rows="4" placeholder="The venue, the vibe, the people, what you're most looking forward to…"></textarea>
+              <label for="fMsg">Tell us about your event <span class="req" aria-hidden="true">*</span></label>
+              <textarea id="fMsg" name="message" rows="4" placeholder="The venue, the vibe, the people, what you're most looking forward to…" required></textarea>
+              <p class="field__err">Please tell us a little about your event.</p>
             </div>
             <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
             <div class="form__foot">

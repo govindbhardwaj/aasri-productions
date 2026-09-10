@@ -319,9 +319,7 @@ window.BDM_DEFAULT_CONTENT = {
     copy: "Tell us a little about your wedding. We will come back to you with availability, a real answer on pricing, and no pressure whatsoever.",
     submitLabel: "Check My Date",
     successTitle: "Thank you — that has arrived.",
-    successCopy: "We will be in touch shortly about your date. If it is urgent, call us on +1 323-447-2333.",
-    services: ["Wedding Photography", "Wedding Videography", "Photo + Video", "Engagement Session", "Engagement Film", "Drone Coverage", "Destination Wedding", "Not sure yet"],
-    heardAbout: ["Instagram", "YouTube", "Google", "A friend or family member", "A wedding planner or venue", "Other"]
+    successCopy: "We will be in touch shortly about your date. If it is urgent, call us on +1 323-447-2333."
   },
 
   footer: {

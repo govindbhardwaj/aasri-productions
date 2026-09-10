@@ -678,7 +678,11 @@ function renderInquiries() {
 
   host.innerHTML = rows.map((r) => {
     const st = r.status || "new";
-    const name = [r.firstName, r.lastName].filter(Boolean).join(" ") || "(no name)";
+    /* Older submissions (before the contact form was simplified) used
+       firstName/lastName and weddingDate — fall back to those so past
+       inquiries still display correctly. */
+    const name = r.name || [r.firstName, r.lastName].filter(Boolean).join(" ") || "(no name)";
+    const eventDate = r.eventDate || r.weddingDate;
     return `<article class="inq-row${st === "new" ? " is-new" : ""}">
       <div>
         <p class="inq-name">${esc(name)}</p>
@@ -690,7 +694,7 @@ function renderInquiries() {
         ${r.heardAbout ? `<div><b>Heard via</b> ${esc(r.heardAbout)}</div>` : ""}
       </div>
       <div class="inq-meta">
-        ${r.weddingDate ? `<div><b>Date</b> ${esc(r.weddingDate)}</div>` : ""}
+        ${eventDate ? `<div><b>Date</b> ${esc(eventDate)}</div>` : ""}
         ${r.location ? `<div><b>Where</b> ${esc(r.location)}</div>` : ""}
         ${r.guests ? `<div><b>Guests</b> ${esc(r.guests)}</div>` : ""}
         ${(r.services || []).length ? `<div><b>Wants</b> ${esc((r.services || []).join(", "))}</div>` : ""}
@@ -717,16 +721,22 @@ async function markInquiry(id, status) {
 }
 
 function exportCsv() {
-  const cols = ["createdAt", "status", "firstName", "lastName", "email", "phone",
-    "weddingDate", "location", "guests", "services", "heardAbout", "message"];
+  const cols = ["createdAt", "status", "name", "email", "phone", "eventDate", "location", "guests", "message"];
   const cell = (v) => {
     if (v == null) return "";
     if (Array.isArray(v)) v = v.join("; ");
     if (v && v.toDate) v = v.toDate().toISOString();
     return `"${String(v).replace(/"/g, '""')}"`;
   };
+  /* Older submissions used firstName/lastName and weddingDate — fold
+     those into the current column shape so past inquiries export cleanly. */
+  const norm = (r) => ({
+    ...r,
+    name: r.name || [r.firstName, r.lastName].filter(Boolean).join(" "),
+    eventDate: r.eventDate || r.weddingDate
+  });
   const csv = [cols.join(",")].concat(
-    inquiries.map((r) => cols.map((c) => cell(r[c])).join(","))
+    inquiries.map((r) => cols.map((c) => cell(norm(r)[c])).join(","))
   ).join("\r\n");
 
   const url = URL.createObjectURL(new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8" }));
