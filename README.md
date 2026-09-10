@@ -70,8 +70,10 @@ ones by editing `data.js` and pushing.
    - `sitemap.xml` and `robots.txt`
    - the `<link rel="canonical">` and `og:` tags at the top of `index.html` and `gallery.html`
 
-> **Custom domain:** add it under Settings → Pages, then commit a `CNAME` file containing
-> the bare domain (e.g. `aasriproductions.com`) and point your DNS at GitHub Pages.
+> **Custom domain:** live at **aasriproductions.in**, via a `CNAME` file in the repo root
+> and DNS records at the registrar (Hostinger) pointing at GitHub Pages: four `A` records
+> on the apex (`185.199.108.153`, `.109.153`, `.110.153`, `.111.153`) and a `CNAME` on
+> `www` → `govindbhardwaj.github.io`. Enforce HTTPS is on once GitHub finishes verifying.
 
 ---
 
