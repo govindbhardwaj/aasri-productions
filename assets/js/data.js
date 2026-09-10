@@ -7,13 +7,18 @@
    renders correctly even with Firebase unconfigured.
 
    PROVENANCE:
-   - Business facts (phone, socials, stats, packages, "Est. 2018", the
-     studio name and map pin) were built against bigdaymemories.com as
-     a design reference and still belong to that studio. Replace them
-     with Aasri Productions' own before this goes live.
-   - Photography and video (gallery, story cards, hero, reels, about
-     clips) are free-to-use stock media from Pexels, chosen to show
-     Indian wedding ceremonies and celebrations rather than the
+   - Business facts (phone, YouTube/Facebook links, stats, packages,
+     "Est. 2018", the studio name and map pin) were built against
+     bigdaymemories.com as a design reference and still belong to that
+     studio. Replace them with Aasri Productions' own before this goes
+     live. business.social.instagram is the one exception — it's the
+     studio's real account (@aasri_productions).
+   - reels.items are the studio's own real work: their five most-liked
+     Instagram Reels (by like count, pulled Sept 2026), each linking
+     out to the real post rather than a re-hosted copy of the video.
+   - The rest of the photography and video (gallery, story cards, hero,
+     about clips) are free-to-use stock media from Pexels, chosen to
+     show Indian wedding ceremonies and celebrations rather than the
      reference site's Western photography. They are real photographs
      and films, but not of Aasri Productions clients — swap in the
      studio's own work when it exists. The nine "signature stories"
@@ -49,7 +54,7 @@ window.BDM_DEFAULT_CONTENT = {
     /* Carried over from the reference site — must be replaced. */
     identityNeedsReview: true,
     social: {
-      instagram: "https://www.instagram.com/bigdaymemories/",
+      instagram: "https://www.instagram.com/aasri_productions/",
       youtube: "https://www.youtube.com/@bigdaymemories_la",
       facebook: "https://www.facebook.com/profile.php?id=100086097605146"
     }
@@ -114,12 +119,19 @@ window.BDM_DEFAULT_CONTENT = {
     eyebrow: "From the feed",
     title: "Little moments.\nBig memories.",
     copy: "One reel, four moments. Short films cut the way you would actually want to watch them back — and share them.",
+    /* The studio's five real most-liked Reels from @aasri_productions,
+       ranked by like count at the time this was pulled (Sept 2026):
+       1,066 / 309 / 244 / 242 / 133 likes. No video file is hosted here
+       -- src is deliberately blank, so pressing play opens the reel on
+       Instagram itself rather than re-hosting someone's Instagram video
+       on a different domain. Posters are cropped stills saved locally
+       so they do not depend on Instagram's short-lived CDN links. */
     items: [
-      { id: "r1", src: "assets/video/reels-1-transcode.mp4", poster: "assets/img/posters/reels-1-poster-00001.jpg", w: 404, h: 720, caption: "The grand entrance",  alt: "Bride walking through a smoke-filled floral mandap entrance", instagram: "" },
-      { id: "r2", src: "assets/video/a-2-transcode.mp4",     poster: "assets/img/posters/a-2-poster-00001.jpg",     w: 300, h: 300, caption: "The ritual",         alt: "Close-up of a bridal ceremony ritual in red and gold",         instagram: "" },
-      { id: "r3", src: "assets/video/a-3-transcode.mp4",     poster: "assets/img/posters/a-3-poster-00001.jpg",     w: 300, h: 300, caption: "The bride",          alt: "Bride portrait in traditional jewelry and attire",             instagram: "" },
-      { id: "r4", src: "assets/video/a-4-transcode.mp4",     poster: "assets/img/posters/a-4-poster-00001.jpg",     w: 300, h: 300, caption: "The reveal",         alt: "Bride lifting her red dupatta, close portrait",                instagram: "" },
-      { id: "r5", src: "assets/video/a-5-transcode.mp4",     poster: "assets/img/posters/a-5-poster-00001.jpg",     w: 300, h: 300, caption: "Mehndi magic",       alt: "Close-up of intricate mehndi on the bride's hands",            instagram: "" }
+      { id: "ig1", src: "", poster: "assets/img/reels/ig-reel-1.webp", w: 404, h: 720, caption: "Behind the lens",     alt: "Filming a wedding celebration through a camera monitor rig", instagram: "https://www.instagram.com/aasri_productions/reel/DXmf6Gckmgk/" },
+      { id: "ig2", src: "", poster: "assets/img/reels/ig-reel-2.webp", w: 600, h: 600, caption: "Bas sone do yaar",    alt: "Two guests dozing off together at 3 AM during the celebration", instagram: "https://www.instagram.com/aasri_productions/reel/DX_7q0VSAuC/" },
+      { id: "ig3", src: "", poster: "assets/img/reels/ig-reel-3.webp", w: 600, h: 600, caption: "Pure celebration",    alt: "Bride and groom dancing joyfully under purple reception lighting", instagram: "https://www.instagram.com/aasri_productions/reel/Db8aPsWu3pF/" },
+      { id: "ig4", src: "", poster: "assets/img/reels/ig-reel-4.webp", w: 600, h: 600, caption: "The grand entry",     alt: "Groom's dramatic sparkler entrance at night", instagram: "https://www.instagram.com/aasri_productions/reel/DT2A4xakkHX/" },
+      { id: "ig5", src: "", poster: "assets/img/reels/ig-reel-5.webp", w: 600, h: 600, caption: "Through the arch",    alt: "Couple walking together through an elaborate floral entrance arch", instagram: "https://www.instagram.com/aasri_productions/reel/DRv5HcnElYU/" }
     ]
   },
 

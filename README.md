@@ -30,8 +30,8 @@ assets/js/firebase-config.js ← paste your Firebase config here
 assets/js/store.js          Firebase bridge (content + inquiries)
 assets/js/main.js           Rendering and interactions
 assets/js/admin.js          Admin panel
-assets/img/                 Photography, project thumbnails, posters
-assets/video/               Hero film, reels, studio clips
+assets/img/                 Photography, project thumbnails, posters, reel covers
+assets/video/               Hero film, studio clips
 ```
 
 ### How content works
@@ -212,8 +212,12 @@ Aasri Productions' own work:
 
 | What | Where it lives |
 |---|---|
-| Every gallery photograph, story-card portrait, hero image and reel | `assets/img/`, `assets/video/` — free-to-use stock from Pexels |
+| Every gallery photograph, story-card portrait and hero image | `assets/img/`, `assets/video/` — free-to-use stock from Pexels |
 | The nine "signature stories" (invented couple names as placeholder captions) | `stories`, `storiesBaseUrl` |
+
+The **Reels** section is the exception — it's real: the studio's five most-liked
+Instagram Reels (`reels.items`), linking out to `instagram.com/aasri_productions`
+rather than re-hosting the video.
 | The wedding-films section and the Love Letters testimonial film | `films`, `loveLetters.filmYoutube` — real public YouTube uploads from other studios, captioned without the real couples' names, shown only to demonstrate the layout |
 
 Never published anywhere, so left blank rather than invented:
