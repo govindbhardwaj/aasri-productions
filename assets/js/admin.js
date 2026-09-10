@@ -6,7 +6,7 @@
    guided tabs write is a *patch*: only the keys you actually edit
    are stored, so untouched copy keeps following data.js.
    ============================================================= */
-import { getAuthModule, getFirebase, merge } from "./store.js";
+import { getAuthModule } from "./store.js";
 
 const $  = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -17,7 +17,6 @@ const PATHS    = window.BDM_PATHS;
 let fb = null;          // { app, fs, auth, authInstance }
 let db = null;
 let draft = {};         // the stored patch (what we publish)
-let live = DEFAULTS;    // defaults + patch, i.e. what the site shows
 let inquiries = [];
 
 /* ------------------------------------------------------------ helpers */
@@ -63,6 +62,15 @@ function status(msg, kind = "") {
   el.style.color = kind === "err" ? "var(--err)" : kind === "ok" ? "var(--ok)" : "";
 }
 
+/* Accepts a full YouTube URL (watch/youtu.be/embed/shorts), or a bare
+   11-character video ID, and returns just the ID. Anything else is left
+   alone rather than guessed at. */
+function extractYouTubeId(raw) {
+  const s = String(raw ?? "").trim();
+  const m = s.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/))([A-Za-z0-9_-]{11})/);
+  return m ? m[1] : s;
+}
+
 let dirty = false;
 function markDirty() {
   dirty = true;
@@ -99,7 +107,6 @@ window.addEventListener("beforeunload", (e) => {
       $("#who").textContent = user.email;
       await loadContent();
       buildEditors();
-      renderTodo();
       await loadInquiries();
     } else {
       $("#app").hidden = true;
@@ -144,7 +151,6 @@ async function loadContent() {
     draft = {};
     status("Could not load saved content: " + (err.code || err.message), "err");
   }
-  live = merge(DEFAULTS, draft);
   $("#jsonBox").value = JSON.stringify(draft, null, 2);
 }
 
@@ -172,11 +178,9 @@ async function publish() {
       updatedAt: fb.fs.serverTimestamp(),
       updatedBy: fb.authInstance.currentUser ? fb.authInstance.currentUser.email : ""
     });
-    live = merge(DEFAULTS, draft);
     $("#jsonBox").value = JSON.stringify(draft, null, 2);
     dirty = false;
     status("Published — the website is updated", "ok");
-    renderTodo();
   } catch (err) {
     status("Publish failed: " + (err.code || err.message), "err");
   } finally {
@@ -232,6 +236,10 @@ function listEditor({ path, label, lead, itemLabel, fields, defaults }) {
           const v = esc(row[f.k] ?? "");
           const ctl = f.type === "textarea"
             ? `<textarea id="${id}" data-list="${esc(path)}" data-i="${i}" data-k="${esc(f.k)}" rows="${f.rows || 3}">${v}</textarea>`
+            : f.type === "select"
+            ? `<select id="${id}" data-list="${esc(path)}" data-i="${i}" data-k="${esc(f.k)}">` +
+              f.options.map((o) => `<option value="${esc(o)}"${String(row[f.k] ?? "") === o ? " selected" : ""}>${esc(o)}</option>`).join("") +
+              "</select>"
             : `<input id="${id}" data-list="${esc(path)}" data-i="${i}" data-k="${esc(f.k)}" type="${f.type || "text"}" value="${v}">`;
           return `<div class="f${f.type === "textarea" || f.wide ? " span" : ""}">
             <label for="${id}">${esc(f.label)}</label>${ctl}
@@ -282,7 +290,7 @@ function buildEditors() {
         ${field({ path: "hero.headlineBottom", label: "Headline line 3" })}
         ${field({ path: "hero.sub", label: "Supporting sentence", type: "textarea" })}
         ${field({ path: "hero.video", label: "Hero video file", hint: "A path inside assets/video/, or a full URL to an MP4." })}
-        ${field({ path: "hero.poster", label: "Hero poster image" })}
+        ${field({ path: "hero.poster", label: "Hero poster image", hint: "A photo link, or a local assets/img/... path." })}
       </div>
     </div>
 
@@ -325,13 +333,26 @@ function buildEditors() {
       </div>
     </div>`;
 
-  /* --- Films & reels -------------------------------------------------- */
+  /* --- Photos & videos -------------------------------------------------- */
   $("#mediaForms").innerHTML = `
+    ${listEditor({
+      path: "gallery.items", label: "Photo gallery", itemLabel: "Photo",
+      lead: "The full portfolio grid. <b>Photo link</b> takes any image URL — from your phone's cloud " +
+            "backup, Google Drive, your own hosting, wherever — or a local <code>assets/img/...</code> path.",
+      fields: [
+        { k: "src",         label: "Photo link", wide: true, hint: "Paste a link to the image, or a local file path." },
+        { k: "cat",         label: "Category", type: "select", options: ["Ceremony", "Couples", "Details", "Celebration"] },
+        { k: "orientation", label: "Shape", type: "select", options: ["Landscape", "Portrait"] },
+        { k: "alt",         label: "Description (for screen readers)" }
+      ],
+      defaults: { src: "", w: 900, h: 675, cat: "Ceremony", alt: "" }
+    })}
+
     <div class="card">
       <h2>Featured wedding film</h2>
       <p class="lead">The large player at the top of the films section.</p>
       <div class="grid2">
-        ${field({ path: "films.featured.youtube", label: "YouTube video ID", hint: "Just the ID — the part after <code>watch?v=</code>." })}
+        ${field({ path: "films.featured.youtube", label: "YouTube link", hint: "Paste the full YouTube URL, a youtu.be link, or just the video ID." })}
         ${field({ path: "films.featured.couple", label: "Couple" })}
         ${field({ path: "films.featured.meta", label: "Wedding type — location" })}
         ${field({ path: "films.featured.note", label: "Note (package, coverage…)" })}
@@ -343,7 +364,7 @@ function buildEditors() {
       lead: "Shown in the grid beneath the featured film. Nothing loads from YouTube until a visitor presses play. " +
             "The current IDs point at other studios' public uploads as layout placeholders — replace them with your own.",
       fields: [
-        { k: "youtube", label: "YouTube video ID" },
+        { k: "youtube", label: "YouTube link", hint: "Full URL or just the video ID." },
         { k: "couple",  label: "Couple / title" },
         { k: "meta",    label: "Wedding type — location", wide: true }
       ],
@@ -352,12 +373,14 @@ function buildEditors() {
 
     ${listEditor({
       path: "reels.items", label: "Reels", itemLabel: "Reel",
-      lead: "Vertical 9:16 clips. Videos live in <code>assets/video/</code>; add an Instagram permalink and a link appears on the tile.",
+      lead: "Vertical 9:16 clips. <b>Video link</b> can be a local file in <code>assets/video/</code> or a direct video URL. " +
+            "If you'd rather point straight at an Instagram Reel instead of hosting a video file, leave Video link blank and add " +
+            "the Instagram permalink — the tile then opens Instagram when pressed.",
       fields: [
-        { k: "src",       label: "Video file path" },
-        { k: "poster",    label: "Poster image path" },
+        { k: "src",       label: "Video link (optional if Instagram is set)", wide: true },
+        { k: "poster",    label: "Poster image link" },
         { k: "caption",   label: "Caption" },
-        { k: "instagram", label: "Instagram permalink (optional)" }
+        { k: "instagram", label: "Instagram permalink" }
       ],
       defaults: { id: "", src: "", poster: "", caption: "", instagram: "" }
     })}
@@ -370,7 +393,7 @@ function buildEditors() {
         { k: "type",     label: "Wedding type" },
         { k: "location", label: "Location" },
         { k: "pkg",      label: "Package badge" },
-        { k: "img",      label: "Image path" },
+        { k: "img",      label: "Photo link", wide: true },
         { k: "slug",     label: "Link (slug or full URL)" }
       ],
       defaults: { couple: "", type: "", location: "", pkg: "Custom", img: "", slug: "" }
@@ -381,7 +404,7 @@ function buildEditors() {
       lead: "The editorial list. The image shows as a hover preview on desktop.",
       fields: [
         { k: "name", label: "Service name" },
-        { k: "img",  label: "Preview image path" },
+        { k: "img",  label: "Preview photo link" },
         { k: "copy", label: "Description", type: "textarea", rows: 2 }
       ],
       defaults: { name: "", copy: "", img: "" }
@@ -432,7 +455,7 @@ function buildEditors() {
       <div class="grid2">
         ${field({ path: "loveLetters.eyebrow", label: "Eyebrow" })}
         ${field({ path: "loveLetters.title", label: "Heading" })}
-        ${field({ path: "loveLetters.filmYoutube", label: "Testimonial film — YouTube ID" })}
+        ${field({ path: "loveLetters.filmYoutube", label: "Testimonial film — YouTube link", hint: "Full URL or just the video ID." })}
         ${field({ path: "loveLetters.filmLabel", label: "Testimonial film caption" })}
         ${field({ path: "loveLetters.placeholder", label: "Still placeholder copy? (yes / no)", type: "select", options: ["yes", "no"] })}
       </div>
@@ -443,7 +466,7 @@ function buildEditors() {
       fields: [
         { k: "couple",   label: "Couple" },
         { k: "location", label: "Venue, city" },
-        { k: "img",      label: "Photograph path" },
+        { k: "img",      label: "Photo link" },
         { k: "quote",    label: "Quote", type: "textarea", rows: 4 }
       ],
       defaults: { quote: "", couple: "", location: "", img: "" }
@@ -460,6 +483,7 @@ function wireEditors() {
       const p = el.dataset.path;
       let v = el.value;
       if (p === "loveLetters.placeholder") v = v === "yes";
+      if (p === "films.featured.youtube" || p === "loveLetters.filmYoutube") v = extractYouTubeId(v);
       const def = get(DEFAULTS, p);
       if (v === "" || v === def) unset(draft, p); else set(draft, p, v);
       markDirty();
@@ -479,7 +503,15 @@ function wireEditors() {
     el.addEventListener("input", () => {
       const p = el.dataset.list, i = +el.dataset.i, k = el.dataset.k;
       const rows = ensureList(p);
-      rows[i][k] = coerce(p, k, el.value);
+      if (p === "gallery.items" && k === "orientation") {
+        /* Orientation is a display-only stand-in for w/h — never stored itself. */
+        rows[i].w = 900;
+        rows[i].h = el.value === "Portrait" ? 1350 : 675;
+      } else if (p === "films.items" && k === "youtube") {
+        rows[i][k] = extractYouTubeId(el.value);
+      } else {
+        rows[i][k] = coerce(p, k, el.value);
+      }
       set(draft, p, rows);
       markDirty();
     });
@@ -524,15 +556,20 @@ function coerce(listPath, key, value) {
   }
   return value;
 }
-/* Render arrays back into the textareas they came from. */
+/* Render arrays back into the form controls they came from. */
 function decorate(listPath, rows) {
-  if (listPath !== "packages.tiers") return rows;
-  return rows.map((r) => ({
-    ...r,
-    includes: Array.isArray(r.includes) ? r.includes.map((x) => Array.isArray(x) ? x.join(" | ") : x).join("\n") : r.includes,
-    addons:   Array.isArray(r.addons) ? r.addons.join("\n") : r.addons,
-    featured: r.featured ? "yes" : "no"
-  }));
+  if (listPath === "packages.tiers") {
+    return rows.map((r) => ({
+      ...r,
+      includes: Array.isArray(r.includes) ? r.includes.map((x) => Array.isArray(x) ? x.join(" | ") : x).join("\n") : r.includes,
+      addons:   Array.isArray(r.addons) ? r.addons.join("\n") : r.addons,
+      featured: r.featured ? "yes" : "no"
+    }));
+  }
+  if (listPath === "gallery.items") {
+    return rows.map((r) => ({ ...r, orientation: (r.h || 0) > (r.w || 0) ? "Portrait" : "Landscape" }));
+  }
+  return rows;
 }
 
 function ensureList(p) {
@@ -546,37 +583,6 @@ function rebuild() {
   buildEditors();
   if (active) selectTab(active);
   $("#jsonBox").value = JSON.stringify(draft, null, 2);
-}
-
-/* ================================================== 4. NEEDS-INPUT LIST */
-function renderTodo() {
-  const gaps = [];
-  const b = live.business || {};
-  if (b.identityNeedsReview) gaps.push(
-    "<b>Aasri Productions' own business details.</b> The phone number, Instagram, " +
-    "YouTube and Facebook links, the &ldquo;Est. 2018&rdquo; date, the studio name, " +
-    "every statistic and all the package pricing still belong to bigdaymemories.com, " +
-    "which this site was built against as a reference. Replace them before launch.");
-  if (b.taglineNeedsReview) gaps.push("a <b>tagline</b> of your own — the current one is a placeholder");
-  if (!String(b.email || "").trim())         gaps.push("a public <b>email address</b> — the email lines stay hidden until you add one");
-  if (!String(b.streetAddress || "").trim()) gaps.push("the <b>studio street address</b>");
-  gaps.push(
-    "<b>Aasri Productions' own photography and films.</b> The gallery, story cards, " +
-    "hero and reels are free-to-use Indian-wedding stock media, not real client work. " +
-    "The films section and the Love Letters testimonial film point at other studios' " +
-    "public YouTube uploads, shown only to demonstrate the layout. Replace all of it.");
-  if (live.loveLetters && live.loveLetters.placeholder)
-    gaps.push("<b>real client reviews</b> — the Love Letters section is showing labelled placeholder copy");
-  if (live.about && live.about.teamNeedsReview && !(live.about.team || []).length)
-    gaps.push("<b>team members</b>, if you want names and portraits in the studio section");
-
-  $("#todo").innerHTML = gaps.length
-    ? `<div class="banner"><b>Needs your input.</b> These are either carried over from the
-       reference site, stand-in stock media, or were never published anywhere, so they
-       were left rather than invented:
-       <ul style="margin:.6rem 0 0;padding-left:1.15rem">
-       ${gaps.map((g) => `<li style="margin-bottom:.4rem">${g}</li>`).join("")}</ul></div>`
-    : "";
 }
 
 /* ====================================================== 5. INQUIRIES */
@@ -698,7 +704,6 @@ $("#reloadBtn").addEventListener("click", async () => {
   dirty = false;
   await loadContent();
   rebuild();
-  renderTodo();
   status("Reloaded from the published version");
 });
 $("#inqFilter").addEventListener("change", renderInquiries);

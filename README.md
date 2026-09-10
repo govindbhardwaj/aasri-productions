@@ -181,7 +181,7 @@ Open `/admin.html`, sign in with the user from step 4, and the panel appears.
 |---|---|
 | **Inquiries** | Every form submission, newest first. Mark contacted / archive, or export the lot as CSV. |
 | **Website content** | Studio details, hero, brand statement, about, inquiry copy, footer. |
-| **Films & reels** | YouTube films, reels (plus Instagram permalinks), signature stories, services. |
+| **Photos & videos** | The full photo gallery, YouTube films, reels, signature stories and services. Photo, video and poster fields all take any link (Instagram-hosted, your own site, wherever) as well as local paths, and YouTube fields accept a full link or just the video ID. A reel can point straight at an Instagram permalink instead of a video file — leave Video link blank and the tile opens Instagram when pressed. |
 | **Packages** | The four tiers. `Includes` takes one `Label \| Value` per line; `Add-ons` one per line; set `Featured` to `yes` on exactly one tier. |
 | **Love letters** | Client reviews. Replace the placeholders and set *Still placeholder copy?* to `no` to drop the warning badge. |
 | **Advanced** | The raw content document, for anything the guided tabs don't cover. Save `{}` to reset everything to the built-in defaults. |

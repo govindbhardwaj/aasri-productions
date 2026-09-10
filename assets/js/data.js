@@ -24,8 +24,8 @@
      couples' names. Replace every video ID before launch.
    - Anything neither site published (a public email, the street
      address, real client reviews, team bios) is left blank and
-     flagged with a *NeedsReview key; the admin panel lists all of
-     the above under "Needs your input".
+     flagged with a *NeedsReview key. See README.md for the full
+     checklist of what still needs replacing before launch.
    ============================================================= */
 
 window.BDM_DEFAULT_CONTENT = {

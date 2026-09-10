@@ -271,11 +271,15 @@
     var host = $("[data-reels]"); if (!host) return;
     host.innerHTML = c.reels.items.map(function (r, i) {
       var ig = (r.instagram || "").trim();
+      var hasVideo = !!(r.src || "").trim();
+      /* A reel with no self-hosted video, only an Instagram link, plays by
+         opening Instagram instead of trying to load a video that isn't there. */
+      var playLabel = (hasVideo ? "Play reel: " : "View on Instagram: ") + r.caption;
       return '<figure class="reel' + (i === 0 ? " reel--feature" : "") + '" data-src="' + esc(r.src) + '" ' +
-        'data-reveal data-delay="' + (i % 4) + '">' +
+        'data-instagram="' + esc(ig) + '" data-reveal data-delay="' + (i % 4) + '">' +
         '<img src="' + esc(r.poster) + '" alt="' + esc(r.alt || r.caption) + '" ' +
           'loading="lazy" decoding="async" width="' + (r.w || 405) + '" height="' + (r.h || 720) + '">' +
-        '<button class="reel__btn" type="button" aria-label="Play reel: ' + esc(r.caption) + '">' +
+        '<button class="reel__btn" type="button" aria-label="' + esc(playLabel) + '">' +
           '<span class="reel__play">' +
             '<svg width="15" height="17" viewBox="0 0 15 17" fill="currentColor" aria-hidden="true"><path d="M15 8.5 0 17V0z"/></svg>' +
           "</span></button>" +
@@ -289,6 +293,12 @@
       host.addEventListener("click", function (e) {
         var btn = e.target.closest(".reel__btn"); if (!btn) return;
         var fig = btn.closest(".reel");
+
+        if (!fig.dataset.src) {
+          if (fig.dataset.instagram) window.open(fig.dataset.instagram, "_blank", "noopener");
+          return;
+        }
+
         /* One reel at a time */
         $$("video", host).forEach(function (v) {
           v.pause();
