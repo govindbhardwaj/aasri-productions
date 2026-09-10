@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Studio Admin — Aasri Productions</title>
 <meta name="robots" content="noindex, nofollow">
-<link rel="icon" href="assets/img/ui/favicon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/ui/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/img/ui/favicon-512.png">
+<link rel="apple-touch-icon" href="assets/img/ui/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -26,7 +28,8 @@ button{ font:inherit; cursor:pointer; }
 /* Shell */
 .top{ position:sticky; top:0; z-index:20; background:rgba(247,244,239,.94); backdrop-filter:blur(12px);
   border-bottom:1px solid var(--rule); display:flex; align-items:center; gap:1rem; padding:.85rem clamp(1rem,4vw,2.5rem); flex-wrap:wrap; }
-.top__brand{ font-family:var(--serif); font-size:1.25rem; margin-right:auto; }
+.top__brand{ font-family:var(--serif); font-size:1.25rem; margin-right:auto; display:flex; align-items:center; gap:.6rem; }
+.top__brand img{ height:30px; width:auto; }
 .top__brand small{ font-family:var(--sans); font-size:.5625rem; letter-spacing:.24em; text-transform:uppercase; color:var(--graphite); display:block; }
 .who{ font-size:.8125rem; color:var(--graphite); }
 main{ max-width:1180px; margin-inline:auto; padding:clamp(1.5rem,4vw,2.75rem) clamp(1rem,4vw,2.5rem) 6rem; }
@@ -127,7 +130,10 @@ main{ max-width:1180px; margin-inline:auto; padding:clamp(1.5rem,4vw,2.75rem) cl
 <!-- ----------------------------------------------------------- SHELL -->
 <div id="app" hidden>
   <header class="top">
-    <div class="top__brand">Aasri Productions<small>Studio Admin</small></div>
+    <div class="top__brand">
+      <img src="assets/img/ui/logo-mark.png" alt="" width="140" height="140">
+      <div>Aasri Productions<small>Studio Admin</small></div>
+    </div>
     <span class="who" id="who"></span>
     <a class="btn btn--ghost btn--sm" href="index.html" target="_blank" rel="noopener">View site</a>
     <button class="btn btn--ghost btn--sm" id="logout">Sign out</button>

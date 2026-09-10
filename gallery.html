@@ -12,7 +12,9 @@
 <meta property="og:description" content="Weddings, ceremonies, couples, details and celebrations, photographed in Los Angeles and worldwide.">
 <meta property="og:image" content="assets/img/gallery/g02.webp">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="assets/img/ui/favicon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/ui/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/img/ui/favicon-512.png">
+<link rel="apple-touch-icon" href="assets/img/ui/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -27,7 +29,10 @@
 
 <header class="nav nav--solid" id="nav">
   <div class="nav__inner">
-    <a class="nav__brand" href="index.html" aria-label="Aasri Productions — home"><b>Aasri Productions</b><span>Est. 2018</span></a>
+    <a class="nav__brand" href="index.html" aria-label="Aasri Productions — home">
+      <img src="assets/img/ui/logo-mark.png" alt="" width="140" height="140">
+      <b>Aasri Productions</b><span>Est. 2018</span>
+    </a>
     <nav class="nav__menu" aria-label="Primary">
       <a href="index.html#stories">Work</a>
       <a href="gallery.html" aria-current="true">Gallery</a>
@@ -83,7 +88,10 @@
   <div class="wrap">
     <div class="foot__top">
       <div class="foot__brand">
-        <b data-bind="business.name">Aasri Productions</b>
+        <div class="foot__brandmark">
+          <img src="assets/img/ui/logo-mark.png" alt="" width="140" height="140">
+          <b data-bind="business.name">Aasri Productions</b>
+        </div>
         <p data-bind="footer.statement"></p>
         <div class="social" data-social style="margin-top:1.6rem"></div>
       </div>

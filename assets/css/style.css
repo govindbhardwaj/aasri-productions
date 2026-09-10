@@ -174,7 +174,10 @@ a:hover .frame--zoom img, .frame--zoom:hover img{ transform:scale(1.045); }
 }
 .nav__inner{ width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:var(--gut);
   display:flex; align-items:center; justify-content:space-between; gap:2rem; }
-.nav__brand{ display:flex; align-items:baseline; gap:.75rem; line-height:1; flex:none; }
+.nav__brand{ display:flex; align-items:baseline; gap:.6rem; line-height:1; flex:none; }
+.nav__brand img{ height:clamp(28px,2.4vw,36px); width:auto; align-self:center; flex:none;
+  transition:height .5s var(--ease); }
+.nav--solid .nav__brand img{ height:clamp(24px,2vw,30px); }
 /* The wordmark has to hold its own against the tracked nav links beside it,
    so it runs a step larger and a weight heavier than body serif copy. */
 .nav__brand b{
@@ -557,7 +560,9 @@ body.menu-open .menu__list a:nth-child(7){ transition-delay:.54s; }
 /* -------------------------------------------------------------- 17. Footer */
 .foot{ background:var(--noir); color:var(--on-noir); padding-top:clamp(4rem,8vw,7rem); }
 .foot__top{ display:grid; grid-template-columns:1fr; gap:2.75rem; padding-bottom:clamp(3rem,6vw,5rem); border-bottom:1px solid var(--rule-noir); }
-.foot__brand b{ font-family:var(--serif); font-weight:400; font-size:1.7rem; display:block; margin-bottom:.9rem; }
+.foot__brandmark{ display:flex; align-items:center; gap:.9rem; margin-bottom:.9rem; }
+.foot__brandmark img{ height:38px; width:auto; flex:none; }
+.foot__brand b{ font-family:var(--serif); font-weight:400; font-size:1.7rem; display:block; }
 .foot__brand p{ color:var(--on-noir-mute); max-width:38ch; font-size:.9375rem; }
 .foot h4{ font-family:var(--sans); font-size:.625rem; letter-spacing:.24em; text-transform:uppercase;
   color:var(--on-noir-mute); margin-bottom:1.2rem; font-weight:400; }
