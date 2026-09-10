@@ -71,6 +71,17 @@ function extractYouTubeId(raw) {
   return m ? m[1] : s;
 }
 
+/* A Google Drive "share" link (drive.google.com/file/d/<id>/view) opens an
+   HTML viewer page, not the image itself, so <img src> can't load it. Drive's
+   thumbnail endpoint serves the real file instead — rewrite share links to
+   that automatically. Anything that isn't a Drive link passes through as-is. */
+function driveDirectUrl(raw) {
+  const s = String(raw ?? "").trim();
+  if (!/drive\.google\.com/.test(s)) return s;
+  const m = s.match(/\/file\/d\/([\w-]+)/) || s.match(/[?&]id=([\w-]+)/);
+  return m ? `https://drive.google.com/thumbnail?id=${m[1]}&sz=w1600` : s;
+}
+
 let dirty = false;
 function markDirty() {
   dirty = true;
@@ -290,7 +301,7 @@ function buildEditors() {
         ${field({ path: "hero.headlineBottom", label: "Headline line 3" })}
         ${field({ path: "hero.sub", label: "Supporting sentence", type: "textarea" })}
         ${field({ path: "hero.video", label: "Hero video file", hint: "A path inside assets/video/, or a full URL to an MP4." })}
-        ${field({ path: "hero.poster", label: "Hero poster image", hint: "A photo link, or a local assets/img/... path." })}
+        ${field({ path: "hero.poster", label: "Hero poster image", hint: "A photo link, or a local assets/img/... path. Google Drive share links work too." })}
       </div>
     </div>
 
@@ -337,10 +348,12 @@ function buildEditors() {
   $("#mediaForms").innerHTML = `
     ${listEditor({
       path: "gallery.items", label: "Photo gallery", itemLabel: "Photo",
-      lead: "The full portfolio grid. <b>Photo link</b> takes any image URL — from your phone's cloud " +
-            "backup, Google Drive, your own hosting, wherever — or a local <code>assets/img/...</code> path.",
+      lead: "The full portfolio grid. <b>Photo link</b> takes any image URL — your own hosting, " +
+            "wherever — or a local <code>assets/img/...</code> path. Paste a Google Drive " +
+            "&ldquo;share&rdquo; link and it's converted automatically; just make sure the file's " +
+            "sharing is set to &ldquo;Anyone with the link.&rdquo;",
       fields: [
-        { k: "src",         label: "Photo link", wide: true, hint: "Paste a link to the image, or a local file path." },
+        { k: "src",         label: "Photo link", wide: true, hint: "Paste a link to the image, a Google Drive share link, or a local file path." },
         { k: "cat",         label: "Category", type: "select", options: ["Ceremony", "Couples", "Details", "Celebration"] },
         { k: "orientation", label: "Shape", type: "select", options: ["Landscape", "Portrait"] },
         { k: "alt",         label: "Description (for screen readers)" }
@@ -484,6 +497,7 @@ function wireEditors() {
       let v = el.value;
       if (p === "loveLetters.placeholder") v = v === "yes";
       if (p === "films.featured.youtube" || p === "loveLetters.filmYoutube") v = extractYouTubeId(v);
+      if (p === "hero.poster") v = driveDirectUrl(v);
       const def = get(DEFAULTS, p);
       if (v === "" || v === def) unset(draft, p); else set(draft, p, v);
       markDirty();
@@ -509,6 +523,16 @@ function wireEditors() {
         rows[i].h = el.value === "Portrait" ? 1350 : 675;
       } else if (p === "films.items" && k === "youtube") {
         rows[i][k] = extractYouTubeId(el.value);
+      } else if (
+        /* Photo fields only — reels.items' own "src" is a video file, so it
+           is deliberately excluded here and left to coerce() below. */
+        (p === "gallery.items" && k === "src") ||
+        (p === "reels.items" && k === "poster") ||
+        (p === "stories" && k === "img") ||
+        (p === "services.items" && k === "img") ||
+        (p === "loveLetters.items" && k === "img")
+      ) {
+        rows[i][k] = driveDirectUrl(el.value);
       } else {
         rows[i][k] = coerce(p, k, el.value);
       }
