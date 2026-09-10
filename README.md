@@ -182,7 +182,7 @@ Open `/admin.html`, sign in with the user from step 4, and the panel appears.
 |---|---|
 | **Inquiries** | Every form submission, newest first. Mark contacted / archive, or export the lot as CSV. |
 | **Website content** | Studio details, hero, brand statement, about, inquiry copy, footer. |
-| **Photos & videos** | The full photo gallery, YouTube films, reels, signature stories and services. Photo, video and poster fields all take any link (Instagram-hosted, your own site, wherever) as well as local paths, and YouTube fields accept a full link or just the video ID. A reel can point straight at an Instagram permalink instead of a video file — leave Video link blank and the tile opens Instagram when pressed. |
+| **Photos & videos** | The full photo gallery, YouTube films, reels, signature stories and services. Photo, video and poster fields all take any link (Instagram-hosted, your own site, wherever) as well as local paths, and YouTube fields accept a full link or just the video ID. A reel's Instagram permalink is what actually plays — pressing the tile opens Instagram's own player inline, on the site, via their embed widget; Video link is only used for a self-hosted file when there's no Instagram permalink at all. |
 | **Packages** | The four tiers. `Includes` takes one `Label \| Value` per line; `Add-ons` one per line; set `Featured` to `yes` on exactly one tier. |
 | **Love letters** | Client reviews. Replace the placeholders and set *Still placeholder copy?* to `no` to drop the warning badge. |
 | **Advanced** | The raw content document, for anything the guided tabs don't cover. Save `{}` to reset everything to the built-in defaults. |
@@ -216,8 +216,12 @@ Aasri Productions' own work:
 | The nine "signature stories" (invented couple names as placeholder captions) | `stories`, `storiesBaseUrl` |
 
 The **Reels** section is the exception — it's real: the studio's five most-liked
-Instagram Reels (`reels.items`), linking out to `instagram.com/aasri_productions`
-rather than re-hosting the video.
+Instagram Reels (`reels.items`), playing inline on the site through Instagram's
+own embed widget rather than being re-hosted here. (Instagram only exposes a
+downloadable video file for reels with original/self-recorded audio; reels
+built on a licensed music track can't be self-hosted without ripping that
+license, so all five play through Instagram's player instead of a mix of
+self-hosted and linked-out.)
 | The wedding-films section and the Love Letters testimonial film | `films`, `loveLetters.filmYoutube` — real public YouTube uploads from other studios, captioned without the real couples' names, shown only to demonstrate the layout |
 
 Never published anywhere, so left blank rather than invented:

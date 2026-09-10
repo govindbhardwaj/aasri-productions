@@ -272,11 +272,9 @@
     host.innerHTML = c.reels.items.map(function (r, i) {
       var ig = (r.instagram || "").trim();
       var hasVideo = !!(r.src || "").trim();
-      /* A reel with no self-hosted video, only an Instagram link, plays by
-         opening Instagram instead of trying to load a video that isn't there. */
-      var playLabel = (hasVideo ? "Play reel: " : "View on Instagram: ") + r.caption;
+      var playLabel = "Play reel: " + r.caption;
       return '<figure class="reel' + (i === 0 ? " reel--feature" : "") + '" data-src="' + esc(r.src) + '" ' +
-        'data-instagram="' + esc(ig) + '" data-reveal data-delay="' + (i % 4) + '">' +
+        'data-instagram="' + esc(ig) + '" data-caption="' + esc(r.caption) + '" data-reveal data-delay="' + (i % 4) + '">' +
         '<img src="' + esc(r.poster) + '" alt="' + esc(r.alt || r.caption) + '" ' +
           'loading="lazy" decoding="async" width="' + (r.w || 405) + '" height="' + (r.h || 720) + '">' +
         '<button class="reel__btn" type="button" aria-label="' + esc(playLabel) + '">' +
@@ -294,10 +292,12 @@
         var btn = e.target.closest(".reel__btn"); if (!btn) return;
         var fig = btn.closest(".reel");
 
-        if (!fig.dataset.src) {
-          if (fig.dataset.instagram) window.open(fig.dataset.instagram, "_blank", "noopener");
-          return;
-        }
+        /* Reels play inline via Instagram's own embeddable player, so the
+           video (and any music licensing it carries) is served by Instagram
+           itself rather than re-hosted on this domain. */
+        if (fig.dataset.instagram) { openReelEmbed(fig.dataset.instagram, fig.dataset.caption); return; }
+
+        if (!fig.dataset.src) return;
 
         /* One reel at a time */
         $$("video", host).forEach(function (v) {
@@ -318,6 +318,50 @@
       });
     }
     observe(host);
+    initReelEmbed();
+  }
+
+  /* Instagram's official embed widget, loaded into a modal on click — the
+     same click-to-load facade used for YouTube films below. */
+  function igEmbedUrl(permalink) {
+    var m = String(permalink || "").match(/\/reel\/([^/?#]+)/);
+    return m ? "https://www.instagram.com/reel/" + m[1] + "/embed/" : "";
+  }
+
+  var igm = { lastFocus: null };
+
+  function openReelEmbed(permalink, caption) {
+    var box = $("#reelModal"); if (!box) return;
+    var url = igEmbedUrl(permalink); if (!url) return;
+    igm.lastFocus = document.activeElement;
+    var stage = $("#igmStage");
+    stage.innerHTML = "";
+    var f = document.createElement("iframe");
+    f.src = url;
+    f.title = "Instagram reel: " + (caption || "");
+    f.allow = "autoplay; encrypted-media; clipboard-write";
+    f.loading = "lazy";
+    stage.appendChild(f);
+    $("#igmCap").textContent = caption || "";
+    box.hidden = false; box.classList.add("is-open");
+    document.body.classList.add("is-locked");
+    $("#igmClose").focus();
+  }
+  function closeReelEmbed() {
+    var box = $("#reelModal"); if (!box) return;
+    box.classList.remove("is-open"); box.hidden = true;
+    $("#igmStage").innerHTML = "";
+    document.body.classList.remove("is-locked");
+    if (igm.lastFocus && igm.lastFocus.focus) igm.lastFocus.focus();
+  }
+  function initReelEmbed() {
+    var box = $("#reelModal"); if (!box || box.dataset.wired) return;
+    box.dataset.wired = "1";
+    $("#igmClose").addEventListener("click", closeReelEmbed);
+    box.addEventListener("click", function (e) { if (e.target === box) closeReelEmbed(); });
+    document.addEventListener("keydown", function (e) {
+      if (box.classList.contains("is-open") && e.key === "Escape") closeReelEmbed();
+    });
   }
 
   /* ====================================================== 7. GALLERY */
