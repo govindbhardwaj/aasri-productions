@@ -395,15 +395,6 @@ body.menu-open .menu__list a:nth-child(7){ transition-delay:.54s; }
 .lb__cap{ padding:1.1rem var(--gut) 1.6rem; color:var(--on-noir-mute); text-align:center; font-size:.875rem; }
 .lb__close{ width:44px; height:44px; display:grid; place-items:center; color:var(--on-noir); }
 
-/* Reel embed modal — Instagram's own embeddable player, loaded on click */
-.igm{ position:fixed; inset:0; z-index:120; background:rgba(11,10,7,.97); display:none; }
-.igm[open],.igm.is-open{ display:grid; grid-template-rows:auto 1fr; }
-.igm__bar{ display:flex; align-items:center; justify-content:space-between; padding:1.1rem var(--gut); color:var(--on-noir-mute);
-  font-size:.6875rem; letter-spacing:.22em; text-transform:uppercase; }
-.igm__close{ width:44px; height:44px; display:grid; place-items:center; color:var(--on-noir); }
-.igm__stage{ display:grid; place-items:start center; overflow:auto; padding:0 var(--gut) 2rem; min-height:0; }
-.igm__stage iframe{ width:min(400px,92vw); height:min(800px,88svh); border:0; border-radius:8px; background:#fff; }
-
 /* -------------------------------------------------------------- 11. Films */
 .films{ background:var(--noir); color:var(--on-noir); }
 .films .eyebrow{ color:var(--on-noir-mute); }
