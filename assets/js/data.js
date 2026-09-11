@@ -8,11 +8,12 @@
 
    PROVENANCE:
    - Business facts (phone, YouTube/Facebook links, stats, packages,
-     "Est. 2018", the studio name and map pin) were built against
-     bigdaymemories.com as a design reference and still belong to that
-     studio. Replace them with Aasri Productions' own before this goes
-     live. business.social.instagram is the one exception — it's the
-     studio's real account (@aasri_productions).
+     "Est. 2018" and the studio name) were built against bigdaymemories.com
+     as a design reference and still belong to that studio. Replace them
+     with Aasri Productions' own before this goes live. business.city and
+     business.mapEmbed point at Bhiwani, Haryana — the studio's real base.
+     business.social.instagram is also real, the studio's own account
+     (@aasri_productions).
    - reels.items are the studio's own real work: their five most-liked
      Instagram Reels (by like count, pulled Sept 2026), each linking
      out to the real post rather than a re-hosted copy of the video.
@@ -45,10 +46,10 @@ window.BDM_DEFAULT_CONTENT = {
     emailNeedsReview: true,
     studioName: "Solar Space Studio",
     studioNote: "our main office / creative space",
-    city: "Downtown Los Angeles, California",
+    city: "Bhiwani, Haryana",
     streetAddress: "",                 /* not published on the reference site */
     addressNeedsReview: true,
-    mapEmbed: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d52896.3874045477!2d-118.250035!3d34.04325!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c7919a9bd2b9%3A0xe31e3fe2d68f7e3!2sBig%20Day%20Memories!5e0!3m2!1sen!2sus!4v1744915395291!5m2!1sen!2sus",
+    mapEmbed: "https://www.google.com/maps?q=Bhiwani,+Haryana,+India&output=embed",
     startingAt: "$2,999",
     founded: "2018",
     /* Carried over from the reference site — must be replaced. */
@@ -61,7 +62,7 @@ window.BDM_DEFAULT_CONTENT = {
   },
 
   hero: {
-    eyebrow: "Event Photography &amp; Cinematography — Los Angeles &amp; Worldwide",
+    eyebrow: "Event Photography &amp; Cinematography — Bhiwani &amp; Worldwide",
     headlineTop: "The moments",
     headlineEm: "you will live in",
     headlineBottom: "forever.",
@@ -89,8 +90,8 @@ window.BDM_DEFAULT_CONTENT = {
       { figure: "30",   suffix: "–45 days", label: "Final delivery", copy: "Your complete gallery and films, delivered in 30 to 45 days." }
     ],
     notes: [
-      { title: "Excellence",          copy: "Top rated, award-winning service in LA." },
-      { title: "A beautiful studio",  copy: "A sun-drenched studio and event space in LA downtown." },
+      { title: "Excellence",          copy: "Top rated, award-winning service in Bhiwani." },
+      { title: "A beautiful studio",  copy: "A sun-drenched studio and event space in Bhiwani." },
       { title: "Beside you all the way", copy: "We are here to support, guide, help you plan, lend a helping hand and, of course, document it all in the most stress free and enjoyable way." }
     ]
   },
@@ -315,7 +316,7 @@ window.BDM_DEFAULT_CONTENT = {
     body: [
       "We are here to support, guide, help you plan, lend a helping hand and, of course, document it all in the most stress free and enjoyable way.",
       "Twenty years and more than a thousand projects later, very little surprises us — which is exactly what you want on a day with a hundred moving parts. We will help you build the timeline, tell you when the light will be best, and be the calmest people in the room.",
-      "Our home is a sun-drenched studio and event space in downtown Los Angeles. Come by, meet us, and see the work printed."
+      "Our home is a sun-drenched studio and event space in Bhiwani. Come by, meet us, and see the work printed."
     ],
     clips: [
       { src: "assets/video/about-1.mp4", label: "Behind the scenes" },
@@ -338,7 +339,7 @@ window.BDM_DEFAULT_CONTENT = {
   },
 
   footer: {
-    statement: "Photography and cinematography from a downtown Los Angeles studio — weddings, events and campaigns, in California and anywhere in the world.",
+    statement: "Photography and cinematography from a Bhiwani studio — weddings, events and campaigns, across India and anywhere in the world.",
     legalName: "Aasri Productions",
     copyrightFrom: "2018"
   }

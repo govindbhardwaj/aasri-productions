@@ -110,7 +110,7 @@ controlled by the security rules in step 5.
 ### 3. Turn on Firestore
 
 Build → **Firestore Database** → **Create database** → start in **production mode** →
-pick a region near Los Angeles (`us-west1` or `nam5`).
+pick a region near Bhiwani (`asia-south1` for Mumbai, or `asia-south2` for Delhi).
 
 ### 4. Create your admin login
 
@@ -203,7 +203,7 @@ against that studio as a reference, and these details still belong to it:
 |---|---|
 | Phone number `+1 323-447-2333` | `business.phone` / `business.phoneHref` |
 | Instagram, YouTube and Facebook accounts | `business.social` (and the `sameAs` list in `index.html`'s structured data) |
-| "Est. 2018", "Solar Space Studio", the LA map pin | `business.founded`, `business.studioName`, `business.mapEmbed`, and the `<span>` in each page's nav |
+| "Est. 2018", "Solar Space Studio" | `business.founded`, `business.studioName`, and the `<span>` in each page's nav |
 | 20+ years / 1000+ weddings / 3-day sneak peek / 30–45 day delivery | `difference.items` and `difference.notes` |
 | All four package tiers, prices and add-ons | `packages.tiers` |
 
