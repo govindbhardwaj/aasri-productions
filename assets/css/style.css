@@ -657,7 +657,9 @@ body.menu-open .menu__list a:nth-child(7){ transition-delay:.54s; }
   .hero__sound{ top:calc(var(--nav-h) + .5rem); bottom:auto; width:44px; height:44px; }
 }
 @media (max-width:480px){
-  .nav__brand span{ display:none; }
+  /* Just the "Est. 2018" tag — .brandmark/.wordmark are spans too, but
+     the logo itself should never disappear on a small screen. */
+  .nav__brand span:not(.brandmark):not(.wordmark){ display:none; }
 }
 @media (max-width:1119px){
   /* Below this the seven links plus a button crowd each other. */
